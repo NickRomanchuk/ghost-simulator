@@ -1,12 +1,12 @@
-TARGETS = fp
+TARGETS = ghosthunt
 OBJS = main.o rooms.o house.o hunters.o evidence.o ghosts.o utils.o logger.o
 CC = gcc
 CFLAGS = -Wextra -Wall
 
 all: $(TARGETS)
 
-fp: $(OBJS) defs.h
-	$(CC) $(CFLAGS) $(OBJS) defs.h -o fp
+ghosthunt: $(OBJS) defs.h
+	$(CC) $(CFLAGS) $(OBJS) defs.h -o ghosthunt
 
 main.o: main.c defs.h
 	$(CC) $(CFLAGS) -c main.c

@@ -1,14 +1,16 @@
-Name: Nicholas Romanchuk   
-Student ID: 101214965
+Author: Nicholas Romanchuk   
+Date: May 9th, 2024
 
-Program's Purpose: To create a program in C, that simulates a ghost hunt in a building. Program will initialize a map of connected rooms,
-                  four hunters (each with a single device they can use to collect evidence), a ghost (wandering around and leaving evidence 
-                  for hunters). Hunters can move rooms, collect evidence, or review evidence. Ghosts can move rooms or leave evidence. When 
-                  a hunter is in a room with a ghost, their fear increases, if they are not with a ghost their boredom increases. If a ghost 
-                  is not in a room with the hunter the ghosts boredom increases. Hunters can review their collected evidence, and if they find 
-                  sufficient evidence can leave. If a hunters boredom or fear crosses the defined threshold they leave the simulation, if a ghosts
-                  bored crosses the defined threshold they leave the simulation.  Simulation ends when the ghost and all hunters have left the 
-                  house. If the hunters collected enough evidence to guess the correct ghost type they win the simulation!
+Program Description: Program writtn in C that simulates a ghost hunt in a haunted house through multithreading. 
+      Program will initialize a "map" of connected rooms, four hunters (each with a single device they can use 
+      to collect evidence), a ghost (wandering around and leaving evidence for hunters). Hunters can move rooms, 
+      collect evidence, or review all collected evidence. Ghosts can move rooms or leave evidence. When a hunter 
+      is in a room with a ghost, their fear increases, if they are not with a ghost their boredom increases. If 
+      a ghost is not in a room with the hunter the ghosts boredom increases. Hunters can review their collected 
+      evidence, and if they find sufficient evidence can leave. If a hunters boredom or fear crosses the defined 
+      threshold they leave the simulation, if a ghosts bored crosses the defined threshold they leave the 
+      simulation. Simulation ends when the ghost and all hunters have left the house. If the hunters collected 
+      enough evidence to correctly guess the ghost type they win the simulation, otherwise the ghost wins!
 
 Files Included:
       i) README.txt - authorship details and instructions for compiling and running program
@@ -25,16 +27,16 @@ Files Included:
    xiii) makefile - make file that can be used to compile and link program into a 'fp' executable
     
 Compiling Program:   
-      i) Extract contents of COMP2401_ROMANCHUK_NICHOLAS_101214965_FP.tar
+      i) Download github repository
      ii) Open terminal
-     ii) In the terminal navigate to folder where files were unzipped
+     ii) In the terminal navigate to downloaded repository
     iii) In the terminal run the command "make"
 
 Running Program:
       i) open terminal
-     ii) navigate to folder containing the "fp" program
-    iii) run "./fp" in the terminal
-     iv) To pipe in data to intialize hunters run "./fp < data.txt" in terminal
+     ii) navigate to folder containing the "ghosthunt" program
+    iii) run "./ghosthunt" in the terminal
+     iv) To pipe in data for intializing hunters run "./ghosthunt < data.txt" in terminal
 
 How to Use the Program:
       i) Run the program (see above)

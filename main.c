@@ -1,24 +1,23 @@
 #include "defs.h"
 
 int main() {
-    //Initalize variables
+    // Initalize variables
     HouseType house;
     HunterType* hunter;
     GhostType* ghost;
     char name[MAX_STR];
     char equipment[MAX_STR];
     pthread_t threadIDS[NUM_HUNTERS + NUM_GHOSTS];
-
-    // Initialize the random number generator
-    srand(time(NULL));
-
+    
     // Create the house
     initHouse(&house);
-    populateRooms(&house);
+
+    // Create the ghost and put them in the house structure        
+    initGhost(&house, &ghost);
     
     // Loop to create all the hunters
     for (int i = 0; i < NUM_HUNTERS; i++) {
-        printf("Enter the name of hunter %d: \n", i + 1);
+        printf("Enter the name of hunter #%d: \n", i + 1);
         scanf("%s", name);
         while ((getchar()) != '\n');
 
@@ -29,13 +28,9 @@ int main() {
         initHunter(house.rooms.head->data, stringToEvidence(equipment), &(house.evidence), name, &hunter);
         addHunter(&(house.hunters), hunter);
     }
- 
-    // Create the ghost and put them in the house structure        
-    initGhost(&house, &ghost);
-    house.ghost = ghost;
     
     // Create threads for the hunters and the ghost
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < NUM_HUNTERS + NUM_GHOSTS; i++) {
         if (i == 0){
             pthread_create(threadIDS + i, NULL, runGhost, ghost);
         } else {
@@ -44,13 +39,13 @@ int main() {
     }
 
     // Wait for all threads to finish
-    for (int i = 0; i < 5; i++) { 
+    for (int i = 0; i < NUM_HUNTERS + NUM_GHOSTS; i++) { 
         pthread_join(threadIDS[i], NULL);
     }
     
     // End simulation and print results
-    endSimulation(&house);
-    
+    printResults(&house);
+
     // Clean up all memory used in the heap
     cleanUp(&house);
 

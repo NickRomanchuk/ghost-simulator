@@ -3,25 +3,19 @@
 /*  Function: void initHouse(HouseType* house)
     Purpose: Initializes a house structure found at the pointer house, initializes
         hunter, rooms, and evidence lists
-        in/out:   house - pointer to house structure to initialize
-    return:   N/A
 */
 void initHouse(HouseType* house) {
     initHunterArray(&(house->hunters));     // Initialize hunter array
     initRoomList(&(house->rooms));          // Initialize room list
     initEvidenceList(&(house->evidence));   // Initialize evidence list
+    populateRooms(house);                   // Populate the rooms
 }
 
 /*
     Dynamically allocates several rooms and populates the provided house.
-    Note: You may modify this as long as room names and connections are maintained.
-        out: house - the house to populate with rooms. Assumes house has been initialized.
 */
 void populateRooms(HouseType* house) {
     // First, create each room
-
-    // createRoom assumes that we dynamically allocate a room, initializes the values, and returns a RoomType*
-    // create functions are pretty typical, but it means errors are harder to return aside from NULL
     struct Room* van                = createRoom("Van");
     struct Room* hallway            = createRoom("Hallway");
     struct Room* master_bedroom     = createRoom("Master Bedroom");
@@ -68,18 +62,16 @@ void populateRooms(HouseType* house) {
 }
 
 /*  Function: void cleanup(HouseType* house)
-    Purpose: Deallocated all memory in the heap related to the provided house types
+    Purpose: Deallocated all memory in the heap related to the provided house type
             at the pointer 'house'. This includes freeing the list evidence and connected rooms
             in each room of the house. Then freeing the hunter list, shared evidence list and all
             the room data
-        in/out:   house - pointer to house structure to deallocate memory from
-    return:   N/A
 */
 void cleanUp(HouseType* house) {
     // Set current node to be the start of the room list
     RoomNode* current = house->rooms.head;
 
-    // Loop through each room and free the associated memory for the room and evidence linked lists
+    // Loop and free the associated memory for the connected room and evidence linked lists
     while (current != NULL) {
         cleanRoomList(&(current->data->connectedRooms));
         cleanEvidenceList(&(current->data->evidence));
@@ -91,7 +83,7 @@ void cleanUp(HouseType* house) {
     cleanRoomList(&(house->rooms));
 
     // Free hunters in the house
-    cleanHunters(house->hunters);
+    cleanHunters(&(house->hunters));
 
     // Free evidence in the house
     cleanEvidenceList(&(house->evidence));
